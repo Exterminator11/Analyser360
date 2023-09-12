@@ -5,5 +5,4 @@ Analyser 360 is a powerful and user-friendly data analysis and visualization too
 
 ## Installation
 1. Clone the repository using the git clone command
-2. Server side-
-3. Client side-
+2. Client side-run the client side to start analysis. This file sends an email to the user that contains the analysis of the file.
