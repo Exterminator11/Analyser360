@@ -1,29 +1,23 @@
+
 import socket
 import pickle
-
+import csv
 HEADERSIZE = 10
-
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((socket.gethostname(), 9999))
-while True:
-    full_msg = b''
-    new_msg = True
+def c(f,e,ff):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind((socket.gethostname(), 9999))
+    s.listen(5)
+    with open(f,'a') as file:
+        file.write(f'\n{e},{ff},{f}')
     while True:
-        msg = s.recv(16)
-        if new_msg:
-            print("new msg len:",msg[:HEADERSIZE])
-            msglen = int(msg[:HEADERSIZE])
-            new_msg = False
-
-        print(f"full message length: {msglen}")
-
-        full_msg += msg
-
-        print(len(full_msg))
-        with open('my.csv','w') as file:
-            if len(full_msg)-HEADERSIZE == msglen:
-                print("full msg recvd")
-                #print(full_msg[HEADERSIZE:])
-                file.write(pickle.loads(full_msg[HEADERSIZE:]))
-                new_msg = True
-                full_msg = b""
+        # now our endpoint knows about the OTHER endpoint.
+        clientsocket, address = s.accept()
+        print(f"Connection from {address} has been established.")
+        with open(f,'r') as file:
+            d = file.read()
+        msg = pickle.dumps(d)
+        msg = bytes(f"{len(msg):<{HEADERSIZE}}", 'utf-8')+msg
+        print(msg)
+        clientsocket.send(msg)
+        clientsocket.close()
+        s.close()

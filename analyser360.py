@@ -2,7 +2,7 @@ from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.menu import MDDropdownMenu
 from notmain import validate_email
-from server import c
+from client import c
 class analyserApp(MDApp):
     format=''
     def __init__(self, **kwargs):
