@@ -1,0 +1,50 @@
+#:kivy 2.1.0
+Screen:
+    MDCard:
+        size_hint:None,None
+        size:700,700
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        elevation:10
+        padding:25
+        spacing:25
+        orientation:'vertical'
+        MDLabel:
+            id:welcome_label
+            text:'Welcome to Analyser360'
+            font_size:40
+            halign:'center'
+            height:self.texture_size[1]
+            padding_y:15
+        MDTextField:
+            id:user
+            hint_text:'Email(Press Enter)'
+            icon_right:'account'
+            helper_text:'Please enter valid email-id'
+            helper_text_mode:'on_error'
+            size_hint_x:None
+            width:450
+            font_size:30
+            mode:'rectangle'
+            pos_hint:{'center_x':0.5}
+        MDTextField:
+            id:filename
+            hint_text:'Filename(Press Enter)'
+            size_hint_x:None
+            width:450
+            font_size:30
+            mode:'rectangle'
+            pos_hint:{'center_x':0.5}
+        MDRaisedButton:
+            id:button
+            text:'Choose output file type'
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            text_color:255,255,255
+            md_bg_color:app.theme_cls.primary_dark
+            on_press:app.menu.open()
+        MDRectangleFlatButton:
+            text:'Send for analysis'
+            font_size:30
+            pos_hint:{'center_x':0.5}
+            text_color:255,255,255
+            md_bg_color:app.theme_cls.primary_dark
+            on_press:app.send()
